@@ -1,0 +1,96 @@
+/* Console.css */
+body {
+  margin: 0;
+  overflow-x: hidden;
+  /* Hide horizontal overflow for the entire page */
+}
+
+.console {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  font-family: monospace;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  /* Hide overflow for the console */
+}
+
+.console-content {
+  flex: 1;
+  overflow-y: auto;
+  /* Add a vertical scrollbar for the content */
+  padding-right: 17px;
+  /* Add padding to accommodate the scrollbar width */
+}
+
+.console-content::-webkit-scrollbar {
+  width: 8px;
+  /* Width of the vertical scrollbar */
+}
+
+.console-content::-webkit-scrollbar-thumb {
+  background-color: #333;
+  /* Scrollbar thumb color */
+  border-radius: 4px;
+  /* Rounded corners for the scrollbar thumb */
+}
+
+.console-content pre {
+  font-family: monospace;
+  white-space: pre-wrap;
+  /* Allow text to wrap within <pre> elements */
+  margin: 0;
+  /* Remove default margin for <pre> */
+  word-wrap: break-word;
+  /* Add word-wrap for long words */
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 10px;
+}
+
+.input-textarea {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #333;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-family: monospace;
+  flex: 1;
+  resize: both;
+  overflow-y: scroll;
+  /* Add vertical scroll */
+  min-height: 30px;
+}
+
+
+.context-textarea {
+  margin-bottom: 0;
+  /* Remove margin-bottom for context textarea */
+}
+
+.question-textarea {
+  margin-right: 10px;
+  /* Add margin to separate question textarea and button */
+}
+
+.input-area {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  /* Align items vertically at the start */
+}
+
+.submit-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-family: monospace;
+  cursor: pointer;
+}
