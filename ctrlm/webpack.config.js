@@ -1,30 +1,28 @@
 const path = require('path');
-
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ZipPlugin = require('zip-webpack-plugin');
+var currentDateTime = new Date();
+const { version } = require('./package.json');
+const buildNumber = Math.floor(Date.now() / 1000);
+const buildInfo = currentDateTime.toDateString() + ' ' + currentDateTime.toLocaleTimeString();
 module.exports = {
-  entry: './src/Pages/popup/index.jsx', // This is your main file
+  entry: './src/index.tsx',
+  mode: 'development',
   output: {
-    path: path.resolve(__dirname, 'dist'), // This is where the output file will be located
-    filename: 'ctrlm.bundle.js', // This is the name of your output file
-    library: 'ctrlm', // This is the name of your library
-    libraryTarget: 'umd', // This will make your library compatible with other environments such as AMD and Node
-    umdNamedDefine: true,
-    globalObject: 'this' // This is necessary to make the library work in both NodeJS and web environments
-  },
-  resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'ctrlm.bundle.js',
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules)/, // This will exclude files within the node_modules directory
+        exclude: /node_modules/,
         use: {
-          loader: 'babel-loader', // This is your transpiler
+          loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
-          }
-        }
+          },
+        },
       },
       {
         test: /\.tsx?$/,
@@ -39,8 +37,38 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
       },
-    ]
+    ],
   },
-  mode: 'production' // This will minify the output file
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      filename: 'ctrlm.html',
+      templateParameters: {
+        version,
+        buildNumber,
+        buildInfo
+      }
+    }),
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      filename: 'index.html',
+      templateParameters: {
+        version,
+        buildNumber,
+        buildInfo
+      }
+    }),
+    new ZipPlugin({
+      filename: 'ctrlm.zip',
+      path: path.resolve(__dirname, 'dist')
+    }),
+  ],
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: false,
+    port: 3000,
+  },
 };
-
