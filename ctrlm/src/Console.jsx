@@ -17,9 +17,9 @@ function Console() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    controlService.createWindow("https://todoist.com/app/project/2149072136", 750, 800, 600, 15, 'Tasks', false);
-    controlService.createWindow("https://mail.google.com/mail/u/0/#inbox", 750, 430, 0, 400, 'Mail', false)
-    controlService.createWindow("https://calendar.google.com/calendar/u/0/r", 750, 520, 0, 15, 'Calendar', true);
+    controlService.createWindow("https://todoist.com/app/project/2149072136", 1600, 1000, 0, 0, 'Tasks', false, true);
+    controlService.createWindow("https://mail.google.com/mail/u/0/#inbox", 1600, 1000, 0, 0, 'Mail', false, true)
+    controlService.createWindow("https://calendar.google.com/calendar/u/0/r", 1600, 1000, 0, 0, 'Calendar', true, true);
   }, []);
 
   return (

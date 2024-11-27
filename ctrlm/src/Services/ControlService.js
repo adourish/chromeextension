@@ -3,13 +3,13 @@ class ControlService {
   constructor() {
     this.windows = new Map();
   }
-
-  createWindow(url = '', width, height, left, top, name = 'Popup', focused=true) {
+  createWindow(url = '', width, height, left, top, name = 'Popup', focused=true, fullscreen=false) {
     try {
       const existingWindow = this.windows.get(name);
       if (existingWindow) {
         console.debug('createWindow existing', existingWindow, url, name, width, height, left, focused)
         existingWindow.location.href = url;
+        this.setFullScreen(name, fullscreen);
         existingWindow.focus();
       } else {
         console.debug('createWindow existing', url, name, width, height, left, focused)
@@ -20,6 +20,7 @@ class ControlService {
         }
         this.windows.set(name, newWindow);
         newWindow.location.href = url;
+        this.setFullScreen(name, fullscreen);
         if (focused) {
           newWindow.focus();
         }
@@ -29,6 +30,16 @@ class ControlService {
     }
   }
 
+  setFullScreen(name = 'Popup', fullscreen=false) {
+    try {
+      const existingWindow = this.windows.get(name);
+      if (existingWindow && fullscreen) {
+        existingWindow.document.documentElement.requestFullscreen(); // Enable fullscreen
+      }
+    } catch (error) {
+      console.error('Failed to set the window to fullscreen', error);
+    }
+  }
   runScriptOnWindow(name, code) {
     try {
       const existingWindow = this.windows.get(name);
