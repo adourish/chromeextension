@@ -3,10 +3,10 @@
     var buildInfo = "Wed Nov 27 2024 11:26:45 PM";
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('ctrlm.service.js').then(function (registration) {
+        navigator.serviceWorker.register('launcher.service.js').then(function (registration) {
           console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }, function (err) {
           console.log('ServiceWorker registration failed: ', err);
         });
       });
-    }</script><script defer="defer" src="ctrlm.bundle.js"></script></head><body><div id="root"></div></body></html>
+    }</script><script defer="defer" src="launcher.bundle.js"></script></head><body><div id="root"></div></body></html>

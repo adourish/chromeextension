@@ -10,7 +10,7 @@ module.exports = {
   mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'ctrlm.bundle.js',
+    filename: 'launcher.bundle.js',
   },
   module: {
     rules: [
@@ -45,7 +45,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      filename: 'ctrlm.html',
+      filename: 'launcher.html',
       templateParameters: {
         version,
         buildNumber,
@@ -62,7 +62,7 @@ module.exports = {
       }
     }),
     new ZipPlugin({
-      filename: 'ctrlm.zip',
+      filename: 'launcher.zip',
       path: path.resolve(__dirname, 'dist')
     }),
   ],

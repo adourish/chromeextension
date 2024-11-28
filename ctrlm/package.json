@@ -1,9 +1,9 @@
 {
-  "name": "ctrlm",
+  "name": "launcher",
   "version": "2.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/adourish/ctrlm"
+    "url": "https://github.com/adourish/launcher"
   },
   "description": "ctrl+m chrome extension.",
   "dependencies": {
