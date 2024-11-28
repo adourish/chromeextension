@@ -22,6 +22,8 @@ function Console() {
   var data = laucherService.getData();
   console.debug('console.constrolservice', controlService, build)
   useEffect(() => {
+    
+    controlService.resizeWindow('🛸', 150, 200);
     data.forEach(windowData => {
       controlService.createWindow(
         windowData.url,

@@ -30,6 +30,17 @@ class ControlService {
     }
   }
 
+  resizeWindow(name = 'Popup', width, height) {
+    try {
+      const existingWindow = this.windows.get(name);
+      if (existingWindow) {
+        existingWindow.resizeTo(width, height);
+      }
+    } catch (error) {
+      console.error('Failed to resize the window', error);
+    }
+  }
+  
   setFullScreen(name = 'Popup', fullscreen=false) {
     try {
       const existingWindow = this.windows.get(name);
