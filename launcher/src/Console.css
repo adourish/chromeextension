@@ -1,0 +1,347 @@
+/* Console.css */
+
+body {
+  margin: 0;
+  background-color: black;
+  overflow-x: hidden;
+}
+
+.console {
+  color: white;
+  padding: 0px;
+  font-family: monospace;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+
+.console-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 17px;
+}
+
+.flex-spacer {
+  flex: 1;
+}
+
+.console-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.console-content::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 4px;
+}
+
+.console-content pre {
+  font-family: monospace;
+  white-space: pre-wrap;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.top-menu {
+  display: flex;
+  justify-content: space-between; /* Adjust alignment as needed */
+  flex-wrap: nowrap; /* Prevent wrapping onto the next line */
+  width: 100%;
+  background-color: #000000;
+}
+
+.top-menu select, .top-menu button {
+  margin-right: 10px; /* Adjust spacing between items */
+}
+
+.top-menu select {
+  background-color: #000000;
+  color: #ffffff;
+  width: 100%;
+}
+
+.top-menu button {
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #ffffff;
+  border: 0;
+  color: #000000;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.image-size-50 {
+  width: 50vw;
+  height: 50vh;
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 10px;
+}
+
+.input-textarea,
+.context-textarea {
+  background-color: transparent;
+  color: white;
+  border: 0px solid rgb(8, 0, 0);
+  padding: 0px;
+  margin-bottom: 0px;
+  font-family: monospace;
+  flex: 1;
+  resize: vertical;
+  overflow: hidden;
+  min-height: 60px;
+  text-align: left;
+}
+
+.input-textarea,
+.knowledge-textarea {
+  overflow-y: scroll;
+}
+
+.input-textarea,
+.content-textarea {
+  overflow-y: scroll;
+}
+
+.ufo-text {
+  font-size: 10px;
+}
+
+.console-text {
+  font-size: 12px;
+}
+
+.ufo-text {
+  font-size: 10px;
+}
+
+.input-area {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.submit-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 0px 0px;
+  font-family: monospace;
+  font-size: 30px;
+  cursor: pointer;
+}
+.history-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 0px 0px;
+  font-family: monospace;
+  font-size: 12px;
+  cursor: pointer;
+}
+.knowledge-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 0px 0px;
+  font-family: monospace;
+  font-size: 12px;
+  cursor: pointer;
+}
+.input-field {
+  width: 100%; /* Set the width to 100% of the container */
+  padding: 10px; /* Add padding for better readability */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+.label-uploader {
+  font-size: 16px;
+  display: inline-block;
+  cursor: pointer;
+  user-select: none;
+}
+.button-uploader {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 0px 0px;
+  font-family: monospace;
+  font-size: 12px;
+  cursor: pointer;
+}
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+.input-textarea,
+.context-textarea,
+.knowledge-textarea,
+.question-textarea {
+  border-top: 1px solid rgb(166, 4, 4);
+}
+
+div.char-count {
+  color: rgb(126, 125, 125);
+}
+
+.status-hidden {
+  display: inline;
+}
+
+.status-visible {
+  display: inline;
+}
+
+.context-textarea,
+.knowledge-textarea {
+  background-color: rgb(20, 20, 20);
+}
+
+@media screen and (min-width: 940px) {
+
+  .submit-button {
+    font-size: 25px;
+  }
+
+  .console-content {
+    padding-right: 10px;
+  }
+
+
+  .status-size-hidden {
+    display: none;
+  }
+  
+  .input-form {
+    margin-top: 5px;
+  }
+
+  .input-textarea {
+    font-size: 14px;
+    min-height: 120px;
+  }
+
+  .question-textarea {
+    font-size: 14px;
+    min-height: 120px;
+  }
+
+  .knowledge-textarea
+ {
+    font-size: 14px;
+    min-height: 90px;
+  }
+
+  .knowledge-big-textarea
+ {
+    font-size: 14px;
+    min-height: 520px;
+  }
+
+  .knowledge-small-textarea
+ {
+    font-size: 14px;
+    min-height: 30px;
+  }
+
+  .context-textarea {
+    font-size: 14px;
+    min-height: 90px;
+  }
+
+  .context-big-textarea {
+    font-size: 14px;
+    min-height: 320px;
+  }
+
+  .context-small-textarea {
+    font-size: 14px;
+    min-height: 30px;
+  }
+
+  .char-count {
+    font-size: 16px;
+  }
+  
+}
+
+
+@media only screen and (max-width: 940px) {
+  .console {
+    color: white;
+    padding: 0px;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    height: 98vh;
+    overflow: hidden;
+    max-width: 98%;
+  }
+
+  .status-hidden {
+    display: none;
+  }
+  
+  .status-visible {
+    display: inline;
+  }
+
+  .submit-button {
+    height:45px;
+    font-size: 45px;
+  }
+
+  .history-button {
+    height: 20px;
+    font-size: 20px;
+  }
+  .knowledge-button {
+    height: 20px;
+    font-size: 20px;
+  }
+
+  .input-form {
+    flex-direction: column;
+  }
+
+  .ufo-text {
+    font-size: 8px;
+  }
+
+  .question-textarea {
+    font-size: 12px;
+    min-height: 80px;
+  }
+
+  .context-textarea,
+  .knowledge-textarea {
+    font-size: 10px;
+    min-height: 40px;
+  }
+  .knowledge-big-textarea,
+  .context-big-textarea {
+    font-size: 10px;
+    min-height: 100px;
+  }
+  .knowledge-small-textarea,
+  .context-small-textarea {
+    font-size: 10px;
+    min-height: 20px;
+  }
+
+  .char-count {
+    font-size: 10px;
+  }
+
+  .top-menu select {
+    font-size: 14px;
+  }
+}
