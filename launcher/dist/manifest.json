@@ -34,9 +34,9 @@
       "sizes": "24x24"
     }
   ],
-  "start_url": "/",
+  "start_url": "https://adourish.github.io/launcher/launcher/dist/",
   "display": "standalone",
-  "scope": "/",
+  "scope": "https://adourish.github.io/launcher/launcher/dist/",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
