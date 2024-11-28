@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { ControlService } from './Services/ControlService'
 import { ConsoleService } from './Services/ConsoleService'
 import { FormatService } from './Services/FormatService'
-import data from './data.json';
+import { LauncherService } from './Services/LauncherService'
 
 var build = '';
 if (window) {
@@ -18,6 +18,8 @@ function Console() {
   const [content, setContent] = useState([]);
   var controlService = new ControlService();
   var formatService = new FormatService();
+  var laucherService = new LauncherService();
+  var data = laucherService.getData();
   console.debug('console.constrolservice', controlService, build)
   useEffect(() => {
     data.forEach(windowData => {
