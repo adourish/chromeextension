@@ -1,10 +1,9 @@
 import './Console.css';
 import React, { useRef, useEffect, useState } from 'react';
-import { ControlService } from './Services/ControlService'
-import { ConsoleService } from './Services/ConsoleService'
+
 import { FormatService } from './Services/FormatService'
 import { LauncherService } from './Services/LauncherService'
-
+import RobodogLib from '../node_modules/robodoglib/dist/robodoglib.bundle';
 var build = '';
 if (window) {
   const version = window.version;
@@ -13,36 +12,68 @@ if (window) {
   build = version + " - " + buildNumber + " - " + buildInfo;
 }
 
+const controlService = new RobodogLib.ControlService();
+const formatService = new FormatService();
+const laucherService = new LauncherService();
+const providerService = new RobodogLib.ProviderService();
+
 function Console() {
 
   const [content, setContent] = useState([]);
-  var controlService = new ControlService();
-  var formatService = new FormatService();
-  var laucherService = new LauncherService();
+  const [showSettings, setShowSettings] = useState(false);
+  const [yamlConfig, setYamlConfig] = useState('')
+
+  console.debug('console.constrolservice', controlService, providerService, laucherService, formatService, build)
   var data = laucherService.getData();
-  console.debug('console.constrolservice', controlService, build)
+  data.forEach(windowData => {
+    controlService.createWindow(
+      windowData.url,
+      windowData.width,
+      windowData.height,
+      windowData.left,
+      windowData.top,
+      windowData.name,
+      windowData.focused,
+      windowData.fullscreen
+    );
+  });
   useEffect(() => {
-    
+    setContent([]);
+    let cc = [];
     controlService.resizeWindow('🛸', 150, 200);
     data.forEach(windowData => {
-      controlService.createWindow(
-        windowData.url,
-        windowData.width,
-        windowData.height,
-        windowData.left,
-        windowData.top,
-        windowData.name,
-        windowData.focused,
-        windowData.fullscreen
-      );
-      
       const formattedItem = formatService.getMessageWithTimestamp(windowData.name, windowData.name, windowData.url);
-      setContent(prevContent => [...prevContent, formattedItem]);
-    })
+      cc.push(formattedItem);
+    });
+    setContent(cc);
   }, []);
 
+  const handleSettingsToggle = () => {
+    console.debug('handleSettingsToggle', showSettings)
+    setShowSettings(!showSettings);
+  };
+  const handleYamlConfigKeyChange = (key) => {
+    console.debug('handleYamlConfigKeyChange', key);
+    providerService.setYaml(key);
+    setYamlConfig(key);
+  };
+
   return (
+
     <div className="console">
+      <span className="char-count">
+        <button type="button" onClick={handleSettingsToggle} aria-label="settings" className="button-uploader" title="Settings">⚙️</button>
+      </span>
+      <div className={`settings-content ${showSettings ? 'visible' : 'hidden'}`}>
+        <label htmlFor="yamlConfig">Config:</label>
+        <textarea
+          id="yamlConfig"
+          rows="30"
+          className="input-field"
+          value={yamlConfig}
+          onChange={(e) => handleYamlConfigKeyChange(e.target.value)}
+        />
+      </div>
       <div id="consoleContent" className="console-content">
         {content.map((item, index) => {
           if (item.role === 'image') {
@@ -59,12 +90,6 @@ function Console() {
             return (
               <div key="{index}">{`${item.command}`}<a href={item.url} rel="noreferrer" target="_blank" alt={item.role}>🔗</a></div>
             );
-          } else if (item.role === 'model') {
-            return (
-              <pre class='console-text' key={index} focus={item.focus} onClick={() => handleSetModel(item.command)}>
-                <code>{`/model ${item.command}`}</code>
-              </pre>
-            );
           } else if (item.role === 'setting' || item.role === 'help') {
             return (
               <pre class='setting-text' key="{index}" focus="{item.focus}" alt="{item.datetime}{item.roleEmoji}">
@@ -73,7 +98,7 @@ function Console() {
             );
           } else {
             return (
-              <pre class='console-text' key={index} focus={item.focus} onClick={() => copyToClipboard(item.command)}>
+              <pre class='console-text' key={index} focus={item.focus} >
                 <code>{`${item.datetime} ${item.roleEmoji}:${item.command}`}</code>
               </pre>
             );
