@@ -1,7 +1,7 @@
 import './Console.css';
 import React, { useRef, useEffect, useState } from 'react';
 import { ControlService } from './Services/ControlService'
-
+import data from './data.json';
 
 var build = '';
 if (window) {
@@ -17,9 +17,18 @@ function Console() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    controlService.createWindow("https://todoist.com/app/project/2149072136", 1600, 1000, 0, 0, 'Tasks', false, true);
-    controlService.createWindow("https://mail.google.com/mail/u/0/#inbox", 1600, 1000, 0, 0, 'Mail', false, true)
-    controlService.createWindow("https://calendar.google.com/calendar/u/0/r", 1600, 1000, 0, 0, 'Calendar', true, true);
+    data.forEach(windowData => {
+      controlService.createWindow(
+        windowData.url,
+        windowData.width,
+        windowData.height,
+        windowData.left,
+        windowData.top,
+        windowData.name,
+        windowData.focused,
+        windowData.fullscreen
+      );
+    })
   }, []);
 
   return (

@@ -1,0 +1,32 @@
+[
+    {
+      "url" : "https://todoist.com/app/project/2149072136",
+      "width" : 1600,
+      "height" : 1000,
+      "left" : 0,
+      "top" : 0,
+      "name" : "Tasks",
+      "focused" : false,
+      "fullscreen" : true
+    },
+    {
+      "url" : "https://mail.google.com/mail/u/0/#inbox",
+      "width" : 1600,
+      "height" : 1000,
+      "left" : 0,
+      "top" : 0,
+      "name" : "Mail",
+      "focused" : false,
+      "fullscreen" : true
+    },
+    {
+      "url" : "https://calendar.google.com/calendar/u/0/r",
+      "width" : 1600,
+      "height" : 1000,
+      "left" : 0,
+      "top" : 0,
+      "name" : "Calendar",
+      "focused" : true,
+      "fullscreen" : true
+    }
+  ]
