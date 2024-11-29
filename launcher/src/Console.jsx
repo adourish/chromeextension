@@ -14,7 +14,8 @@ const controlService = new RobodogLib.ControlService();
 const formatService = new RobodogLib.FormatService();
 const laucherService = new LauncherService();
 const providerService = new RobodogLib.ProviderService();
-
+const ConsoleContentComponent = RobodogLib.ConsoleContentComponent;
+console.debug(ConsoleContentComponent)
 function Console() {
 
   const [content, setContent] = useState([]);
@@ -77,6 +78,14 @@ function Console() {
     controlService.focus(name, url)
   }
 
+  const handleSetModel = (event) => {
+    var message = 'Model is set to ' + event;
+    console.debug('handleSetModel', message);
+  }
+  function copyToClipboard(text) {
+    console.debug('copyToClipboard', text);
+  }
+
   return (
 
     <div className="console">
@@ -93,43 +102,12 @@ function Console() {
           onChange={(e) => handleYamlConfigKeyChange(e.target.value)}
         />
       </div>
-      <div id="consoleContent" className="console-content">
-        {content.map((item, index) => {
-          if (item.role === 'image') {
-            return (
-              <div key="{index}"><img src={item.command} alt={item.role} className='image-size-50' /></div>
-            );
-          } else if (item.role === 'ufo') {
-            return (
-              <pre class='ufo-text' key={index} focus={item.focus} alt="{item.datetime}{item.roleEmoji}">
-                <code>{item.command}</code>
-              </pre>
-            );
-          } else if (item.role === 'search') {
-            return (
-              <div key="{index}">{`${item.command}`}<a href={item.url} rel="noreferrer" target="_blank" alt={item.role}>🔗</a></div>
-            );
-          } else if (item.role === 'popup') {
-            return (
-              <pre class='console-text' key={index} focus={item.focus} onClick={() => handleLaunch(item.command, item.url)}>
-                <code>{`${item.datetime} ${item.roleEmoji}:${item.command}`}</code>
-              </pre>
-            );
-          } else if (item.role === 'setting' || item.role === 'help') {
-            return (
-              <pre class='setting-text' key="{index}" focus="{item.focus}" alt="{item.datetime}{item.roleEmoji}">
-                <code>{item.command}</code>
-              </pre>
-            );
-          } else {
-            return (
-              <pre class='console-text' key={index} focus={item.focus} >
-                <code>{`${item.datetime} ${item.roleEmoji}:${item.command}`}</code>
-              </pre>
-            );
-          }
-        })}
-      </div>
+      <ConsoleContentComponent
+        content={content}
+        handleCopyToClipboard={copyToClipboard}
+        handleSetModel={handleSetModel}
+        handleLaunch={handleLaunch}
+      />
     </div>
   );
 }
