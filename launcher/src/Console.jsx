@@ -27,10 +27,12 @@ function Console() {
   useEffect(() => {
     console.log('Component has mounted!');
     if (!isLoaded) {
+      setContent([...content, formatService.getMessageWithTimestamp(build, 'experiment')]);
       let data = laucherService.getData();
       print(data, setContent);
       launch(data);
       setIsLoaded(true);
+      controlService.saveWindowsToLocalStorage();
     }
   }, [isLoaded, setIsLoaded, content, setContent]);
 
