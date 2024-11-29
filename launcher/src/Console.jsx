@@ -15,6 +15,7 @@ const formatService = new RobodogLib.FormatService();
 const laucherService = new LauncherService();
 const providerService = new RobodogLib.ProviderService();
 const ConsoleContentComponent = RobodogLib.ConsoleContentComponent;
+const SettingsComponent = RobodogLib.SettingsComponent;
 console.debug(ConsoleContentComponent)
 function Console() {
 
@@ -59,7 +60,6 @@ function Console() {
         windowData.fullscreen
       );
     });
-    //controlService.resizeWindow('🛸', 150, 200);
     return data;
   }
 
@@ -92,16 +92,11 @@ function Console() {
       <span className="char-count">
         <button type="button" onClick={handleSettingsToggle} aria-label="settings" className="button-uploader" title="Settings">⚙️</button>
       </span>
-      <div className={`settings-content ${showSettings ? 'visible' : 'hidden'}`}>
-        <label htmlFor="yamlConfig">Config:</label>
-        <textarea
-          id="yamlConfig"
-          rows="30"
-          className="input-field"
-          value={yamlConfig}
-          onChange={(e) => handleYamlConfigKeyChange(e.target.value)}
-        />
-      </div>
+      <SettingsComponent
+        showSettings={showSettings}
+        yamlConfig={yamlConfig}
+        handleYamlConfigKeyChange={handleYamlConfigKeyChange}
+      />
       <ConsoleContentComponent
         content={content}
         handleCopyToClipboard={copyToClipboard}

@@ -17,7 +17,9 @@ class LauncherService {
   height: 1000
   left: 0
   top: 0
-  name: Google Chat
+  name: Chat
+  group: b
+  enabled: true
   focused: false
   fullscreen: true
 - url: https://web.whatsapp.com/
@@ -26,6 +28,8 @@ class LauncherService {
   left: 0
   top: 0
   name: Whatsapp
+  group: b
+  enabled: true
   focused: false
   fullscreen: true
 - url: https://todoist.com/app/project/2149072136
@@ -34,6 +38,8 @@ class LauncherService {
   left: 0
   top: 0
   name: Tasks
+  group: a
+  enabled: true
   focused: false
   fullscreen: true
 - url: https://mail.google.com/mail/u/0/#inbox
@@ -42,6 +48,8 @@ class LauncherService {
   left: 0
   top: 0
   name: Mail
+  group: a
+  enabled: true
   focused: false
   fullscreen: true
 - url: https://calendar.google.com/calendar/u/0/r
@@ -50,6 +58,8 @@ class LauncherService {
   left: 0
   top: 0
   name: Calendar
+  group: a
+  enabled: true
   focused: true
   fullscreen: true
 
