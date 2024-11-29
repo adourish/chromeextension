@@ -23,30 +23,59 @@ function Console() {
   const [showSettings, setShowSettings] = useState(false);
   const [yamlConfig, setYamlConfig] = useState('')
 
-  console.debug('console.constrolservice', controlService, providerService, laucherService, formatService, build)
-  var data = laucherService.getData();
-  data.forEach(windowData => {
-    controlService.createWindow(
-      windowData.url,
-      windowData.width,
-      windowData.height,
-      windowData.left,
-      windowData.top,
-      windowData.name,
-      windowData.focused,
-      windowData.fullscreen
-    );
-  });
+  const [isLoaded, setIsLoaded] = useState(false);
+
+
   useEffect(() => {
-    setContent([]);
-    let cc = [];
-    controlService.resizeWindow('🛸', 150, 200);
-    data.forEach(windowData => {
-      const formattedItem = formatService.getMessageWithTimestamp(windowData.name, windowData.name, windowData.url);
-      cc.push(formattedItem);
+    console.log('Component has mounted!');
+    if (!isLoaded) {
+      let data = laucherService.getData();
+      print(data, setContent);
+      launch(data);
+      setIsLoaded(true);
+    }
+  }, [isLoaded, setIsLoaded, content, setContent, formatService]);
+
+
+
+
+
+ 
+
+  function print(data, setContent){
+
+    var _cc = [
+      ...content,
+      formatService.getMessageWithTimestamp('Launcher', 'user')
+    ];
+    setContent(_cc);
+    data.forEach(d => {
+      _cc.push(formatService.getMessageWithTimestamp(d.name, 'user'))
+      setContent(_cc);
+
     });
-    setContent(cc);
-  }, []);
+
+  }
+
+  function launch(data) {
+
+    console.debug('console.constrolservice', controlService, providerService, laucherService, formatService, build)
+
+    data.forEach(windowData => {
+      controlService.createWindow(
+        windowData.url,
+        windowData.width,
+        windowData.height,
+        windowData.left,
+        windowData.top,
+        windowData.name,
+        windowData.focused,
+        windowData.fullscreen
+      );
+    });
+    //controlService.resizeWindow('🛸', 150, 200);
+    return data;
+  }
 
   const handleSettingsToggle = () => {
     console.debug('handleSettingsToggle', showSettings)
@@ -57,6 +86,11 @@ function Console() {
     providerService.setYaml(key);
     setYamlConfig(key);
   };
+  //handleLauch
+  function handleLaunch(name, url) {
+    console.debug('handleLaunch', name, url)
+    controlService.focus(name, url)
+  }
 
   return (
 
@@ -89,6 +123,12 @@ function Console() {
           } else if (item.role === 'search') {
             return (
               <div key="{index}">{`${item.command}`}<a href={item.url} rel="noreferrer" target="_blank" alt={item.role}>🔗</a></div>
+            );
+          } else if (item.role === 'popup') {
+            return (
+              <pre class='console-text' key={index} focus={item.focus} onClick={() => handleLaunch(item.command, item.url)}>
+             <code>{`${item.datetime} ${item.roleEmoji}:${item.command}`}</code>
+              </pre>
             );
           } else if (item.role === 'setting' || item.role === 'help') {
             return (

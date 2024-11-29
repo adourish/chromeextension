@@ -3,7 +3,7 @@ class ControlService {
   constructor() {
     this.windows = new Map();
   }
-  createWindow(url = '', width, height, left, top, name = 'Popup', focused=true, fullscreen=false) {
+  createWindow(url = '', width, height, left, top, name = 'Popup', focused = true, fullscreen = false) {
     try {
       const existingWindow = this.windows.get(name);
       if (existingWindow) {
@@ -40,8 +40,22 @@ class ControlService {
       console.error('Failed to resize the window', error);
     }
   }
-  
-  setFullScreen(name = 'Popup', fullscreen=false) {
+
+  focus(name = 'Popup') {
+    try {
+      const existingWindow = this.windows.get(name);
+      console.debug('focus', existingWindow, name)
+      if (existingWindow) {
+        existingWindow.focus(name);
+      } else {
+
+      }
+    } catch (error) {
+      console.error('Failed to resize the window', error);
+    }
+  }
+
+  setFullScreen(name = 'Popup', fullscreen = false) {
     try {
       const existingWindow = this.windows.get(name);
       if (existingWindow && fullscreen) {
