@@ -46,7 +46,7 @@ function Console() {
 
     var _cc = [
       ...content,
-      formatService.getMessageWithTimestamp('Launcher', 'user')
+      formatService.getMessageWithTimestamp('Launcher', 'popup')
     ];
     setContent(_cc);
     data.forEach(d => {
