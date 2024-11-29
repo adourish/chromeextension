@@ -10,7 +10,7 @@ if (window) {
   build = version + " - " + buildNumber + " - " + buildInfo;
 }
 
-const controlService = new RobodogLib.ControlService();
+const controlService = new RobodogLib.ControlService('launcherWindow');
 const formatService = new RobodogLib.FormatService();
 const laucherService = new LauncherService();
 const providerService = new RobodogLib.ProviderService();
@@ -32,7 +32,7 @@ function Console() {
       print(data, setContent);
       launch(data);
       setIsLoaded(true);
-      controlService.saveWindowsToLocalStorage();
+      
     }
   }, [isLoaded, setIsLoaded, content, setContent]);
 
@@ -61,6 +61,7 @@ function Console() {
         windowData.focused,
         windowData.fullscreen
       );
+      controlService.saveWindowsToLocalStorage('launcherWindow');
     });
     return data;
   }
