@@ -27,7 +27,7 @@ function Console() {
   useEffect(() => {
     console.log('Component has mounted!');
     if (!isLoaded) {
-      setContent([...content, formatService.getMessageWithTimestamp(build, 'experiment')]);
+
       let data = laucherService.getData();
       print(data, setContent);
       launch(data);
@@ -39,7 +39,7 @@ function Console() {
   function print(data, setContent) {
     var _cc = [
       ...content,
-      formatService.getMessageWithTimestamp('Launcher', 'assistent')
+      formatService.getMessageWithTimestamp('Launcher ' + build, 'assistent')
     ];
     setContent(_cc);
     data.forEach(d => {
