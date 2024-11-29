@@ -1,7 +1,5 @@
 import './Console.css';
 import React, { useRef, useEffect, useState } from 'react';
-
-import { FormatService } from './Services/FormatService'
 import { LauncherService } from './Services/LauncherService'
 import RobodogLib from '../node_modules/robodoglib/dist/robodoglib.bundle';
 var build = '';
@@ -13,7 +11,7 @@ if (window) {
 }
 
 const controlService = new RobodogLib.ControlService();
-const formatService = new FormatService();
+const formatService = new RobodogLib.FormatService();
 const laucherService = new LauncherService();
 const providerService = new RobodogLib.ProviderService();
 
