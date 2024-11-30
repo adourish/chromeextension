@@ -23,7 +23,7 @@
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^2.5.207",
     "robodog": "^1.7.2",
-    "robodoglib": "^2.4.16",
+    "robodoglib": "^2.4.18",
     "style-loader": "^4.0.0",
     "tesseract.js": "^5.1.0",
     "typescript": "^4.9.5",

@@ -61,7 +61,7 @@ function Console() {
         windowData.focused,
         windowData.fullscreen
       );
-      controlService.saveWindowsToLocalStorage('launcherWindow');
+
     });
     return data;
   }
