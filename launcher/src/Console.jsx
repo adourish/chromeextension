@@ -23,26 +23,27 @@ function Console() {
   const [showSettings, setShowSettings] = useState(false);
   const [yamlConfig, setYamlConfig] = useState('')
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const [data, setData] = useState([]);
   useEffect(() => {
     console.log('Component has mounted!');
     if (!isLoaded) {
 
-      let data = laucherService.getData();
-      print(data, setContent);
-      launch(data);
+      let _data = laucherService.getData();
+      setData(_data)
+      print(_data, setContent);
+      launch(_data);
       setIsLoaded(true);
       
     }
   }, [isLoaded, setIsLoaded, content, setContent]);
 
-  function print(data, setContent) {
+  function print(d, setContent) {
     var _cc = [
       ...content,
       formatService.getMessageWithTimestamp('Launcher ' + build, 'assistent')
     ];
     setContent(_cc);
-    data.forEach(d => {
+    d.forEach(d => {
       _cc.push(formatService.getMessageWithTimestamp(d.name, 'popup', d.url))
       setContent(_cc);
     });
@@ -65,6 +66,21 @@ function Console() {
     });
     return data;
   }
+  useEffect(() => {
+    function handleUnload(event) {
+      console.debug('handleUnload event', event);
+      data.forEach(windowData => {
+        console.debug('handleUnload each', windowData.name, windowData);
+        controlService.closeWindow(windowData.name);
+      });
+    }
+  
+    window.addEventListener('beforeunload', handleUnload);
+  
+    return () => {
+      window.removeEventListener('beforeunload', handleUnload);
+    };
+  }, [data, controlService]);
 
   const handleSettingsToggle = () => {
     console.debug('handleSettingsToggle', showSettings)
@@ -84,30 +100,30 @@ function Console() {
   const handleSetModel = (event) => {
     var message = 'Model is set to ' + event;
     console.debug('handleSetModel', message);
+    }
+    function copyToClipboard(text) {
+      console.debug('copyToClipboard', text);
+    }
+
+    return (
+
+      <div className="console">
+        <span className="char-count">
+          <button type="button" onClick={handleSettingsToggle} aria-label="settings" className="button-uploader" title="Settings">⚙️</button>
+        </span>
+        <SettingsComponent
+          showSettings={showSettings}
+          yamlConfig={yamlConfig}
+          handleYamlConfigKeyChange={handleYamlConfigKeyChange}
+        />
+        <ConsoleContentComponent
+          content={content}
+          handleCopyToClipboard={copyToClipboard}
+          handleSetModel={handleSetModel}
+          handleLaunch={handleLaunch}
+        />
+      </div>
+    );
   }
-  function copyToClipboard(text) {
-    console.debug('copyToClipboard', text);
-  }
 
-  return (
-
-    <div className="console">
-      <span className="char-count">
-        <button type="button" onClick={handleSettingsToggle} aria-label="settings" className="button-uploader" title="Settings">⚙️</button>
-      </span>
-      <SettingsComponent
-        showSettings={showSettings}
-        yamlConfig={yamlConfig}
-        handleYamlConfigKeyChange={handleYamlConfigKeyChange}
-      />
-      <ConsoleContentComponent
-        content={content}
-        handleCopyToClipboard={copyToClipboard}
-        handleSetModel={handleSetModel}
-        handleLaunch={handleLaunch}
-      />
-    </div>
-  );
-}
-
-export default Console;
+  export default Console;
